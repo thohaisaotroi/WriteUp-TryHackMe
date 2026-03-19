@@ -1,7 +1,7 @@
 # TryHackMe — Credentials Harvesting | Full Walkthrough
 
 > **Room:** [Credentials Harvesting](https://tryhackme.com/room/credharvesting)  
-> **Difficulty:** Hard  
+> **Difficulty:** Medium  
 > **Author:** vodanhtieutot  
 > **Platform:** TryHackMe  
 
@@ -18,8 +18,7 @@
 7. [Task 7 — Domain Controller Credentials (NTDS)](#7-task-7--domain-controller-credentials-ntds)
 8. [Task 8 — LAPS (Local Administrator Password Solution)](#8-task-8--laps-local-administrator-password-solution)
 9. [Task 9 — Other AD Attacks (Kerberoasting & AS-REP Roasting)](#9-task-9--other-ad-attacks-kerberoasting--as-rep-roasting)
-10. [Flags & Answers Summary](#10-flags--answers-summary)
-11. [Tools Used](#11-tools-used)
+10. [Tools Used](#11-tools-used)
 
 ---
 
@@ -724,30 +723,8 @@ The `victim` account has pre-authentication disabled — its AS-REP hash is retu
 | Enumerate for SPN users using GetUserSPNs. What is the Service Principal Name for the Domain Controller? | `http/creds-harvestin.thm.red` |
 | After finding the SPN account, perform Kerberoasting and crack the TGS ticket. What is the password? | `Passw0rd1` |
 
----
-
-## 10. Flags & Answers Summary
-
-| Task | Question | Answer |
-|---|---|---|
-| Task 3 | Flag found in Windows registry with `reg query` | `7tyh4ckm3` |
-| Task 3 | Password of victim user found in AD description | `Passw0rd!@#` |
-| Task 4 | NTLM hash for Administrator account (from SAM dump) | `98d3a787a80d08385cea7fb4aa2a4261` |
-| Task 5 | Is LSA protection enabled? | `Y` |
-| Task 6 | Password of THMuser for internal-app.thm.red | `E4syPassw0rd` |
-| Task 6 | Password for the 10.10.237.226 SMB share (Mimikatz credman) | `jfxKruLkkxoPjwe3` |
-| Task 6 | Flag from `c:\Users\thm-local\Saved Games\flag.txt` | `THM{RunA5S4veCr3ds}` |
-| Task 7 | Target system bootkey value (from NTDS local dump) | `0x36c8d26ec0df8b23ce63bcefa6e2d821` |
-| Task 7 | Clear-text password for bk-admin (hashcat cracked) | `Passw0rd123` |
-| Task 8 | Group with ExtendedRightHolder to read LAPS | `LAPsReader` |
-| Task 8 | LAPS password for Creds-Harvestin computer | `THMLAPSPassw0rd` |
-| Task 8 | User able to read LAPS passwords | `bk-admin` |
-| Task 9 | SPN for the Domain Controller | `http/creds-harvestin.thm.red` |
-| Task 9 | Password cracked from Kerberoasting (svc-thm) | `Passw0rd1` |
-
----
-
-## 11. Tools Used
+--- 
+## 10. Tools Used
 
 | Tool | Purpose |
 |---|---|
